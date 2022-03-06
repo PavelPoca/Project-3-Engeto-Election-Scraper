@@ -4,7 +4,11 @@ from bs4 import BeautifulSoup
 import sys
 
 def main(url: str, soubor):
-    print(f"Začínám zpracovávat data obcí pro {okres(url)}")
+    try:
+        print(f"Začínám zpracovávat data obcí pro {okres(url)}")
+    except AttributeError:
+        print("Chybně zadaná url, ukončuji skript.")
+        quit()
     soup = zpracovat_url(url)
     make_csv(soup, soubor, url)
     print(f"Data zpracována. Soubor uložen jako: '{soubor}.csv'")
